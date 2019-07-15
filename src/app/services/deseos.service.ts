@@ -5,10 +5,33 @@ import { Lista } from '../models/lista.model';
   providedIn: 'root'
 })
 export class DeseosService {
-  listas: Lista[] = [];
+  listas: Lista[];
   constructor() {
-    const lista1 = new Lista('recolectar las gemas');
-    const lista2 = new Lista('Matar heroes');
-    this.listas.push(lista1, lista2);
+    this.loadStorage();
+  }
+
+  setList(title: string) {
+    const list = new Lista(title);
+    this.listas.push(list);
+    this.saveStorage();
+    return list;
+  }
+
+  getList(id: string | number): Lista {
+    id = Number(id);
+    return this.listas.find( listaData => listaData.id === id);
+
+  }
+
+  deleteList(list: Lista) {
+    this.listas = this.listas.filter(data => data.id !== list.id);
+    this.saveStorage();
+  }
+
+  saveStorage = () =>  localStorage.setItem('lista', JSON.stringify(this.listas));
+
+  loadStorage() {
+    this.listas = JSON.parse(localStorage.getItem('lista'));
+    if (!this.listas) this.listas = []; 
   }
 }

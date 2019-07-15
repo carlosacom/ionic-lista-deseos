@@ -4,6 +4,7 @@ export class Lista {
     public id: number;
     public created_at: Date;
     public finish: boolean;
+    public finished_at: Date;
     public items: Array<ListaItem>;
 
     constructor(
@@ -11,6 +12,7 @@ export class Lista {
     ) {
         this.items = [];
         this.finish = false;
+        this.finished_at = null;
         this.created_at = new Date();
         this.id = new Date().getTime();
     }

@@ -1,6 +1,8 @@
 export class ListaItem {
+    public completado: boolean;
     constructor(
-        public desc: string,
-        public completado: boolean
-    ) { }
+        public desc: string
+    ) {
+        this.completado = false;
+    }
 }
